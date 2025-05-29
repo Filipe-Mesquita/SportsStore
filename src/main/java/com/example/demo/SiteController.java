@@ -6,14 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class ProductController {
+public class SiteController {
 
 	@Autowired
 	private ProductService productService;
 
 	@GetMapping("/")
-	public String home(Model model) {
-		model.addAttribute("products", productService.getAllProducts());
+	public String index(Model model) {
+		model.addAttribute("featuredProducts", productService.getAllProducts());
 		return "index";
 	}
 
@@ -30,4 +30,6 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "product-detail";
 	}
+
+	
 }

@@ -147,10 +147,23 @@ header {
   cursor: pointer;
 }
 
+
+/* Reset agressivo e confiável para todos os estados do link */
+.store-link,
 .store-link:link,
 .store-link:visited,
 .store-link:hover,
 .store-link:active {
-  text-decoration: none ;
-  color: white ;
+  text-decoration: none !important;
+  color: white !important;
+  font-weight: bold;
+  display: inline-block;
 }
+
+/* h1 continua estilizado como antes */
+.store-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+

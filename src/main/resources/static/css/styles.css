@@ -146,3 +146,11 @@ header {
   margin: 0.3rem auto 0 auto;
   cursor: pointer;
 }
+
+.store-link:link,
+.store-link:visited,
+.store-link:hover,
+.store-link:active {
+  text-decoration: none ;
+  color: white ;
+}

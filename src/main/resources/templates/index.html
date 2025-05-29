@@ -22,10 +22,11 @@
 			</div>
 		</div>
 
-		<nav class="categories">
-			<a href="#">Futebol</a> <a href="#">Basquetebol</a> <a href="#">Corrida</a>
-			<a href="#">Fitness</a>
-		</nav>
+		 <nav class="categories">
+            <a th:each="category : ${categories}"
+               th:href="@{'/products/category/' + ${category}}"
+               th:text="${category}">Categoria</a>
+        </nav>
 	</header>
 
 	<main>

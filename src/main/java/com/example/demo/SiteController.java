@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -14,6 +15,7 @@ public class SiteController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("featuredProducts", productService.getAllProducts());
+		model.addAttribute("categories", productService.getAllCategories());
 		return "index";
 	}
 
@@ -29,6 +31,17 @@ public class SiteController {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
 		model.addAttribute("product", product);
 		return "product-detail";
+	}
+	
+	@GetMapping("/products/category/{category}")
+	public String categoryProducts(@PathVariable("category") String category, Model model) {
+		List <Product> categoryProducts = productService.getProductByCategory(category);
+		model.addAttribute("category", category);
+		model.addAttribute("products", categoryProducts);
+		model.addAttribute("categories", productService.getAllCategories());
+		return "category-products";
+		
+		
 	}
 
 	

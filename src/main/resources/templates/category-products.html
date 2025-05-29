@@ -27,6 +27,7 @@
 
         
         <nav class="categories">
+        	<a th:href="@{/products}">Todos os Produtos</a>
             <a th:each="category : ${categories}"
                th:href="@{'/products/category/' + ${category}}"
                th:text="${category}">Categoria</a>

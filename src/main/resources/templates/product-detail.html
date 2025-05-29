@@ -1,14 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:text="${product.name}">Product</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title th:text="${product.name}">Detalhes do Produto</title>
+<link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-	<h1 th:text="${product.name}">Product Name</h1>
-	<p th:text="${product.description}">Description</p>
-	<p>
-		Price: $<span th:text="${product.price}">0.00</span>
-	</p>
-	<a href="/">Back to home page</a>
+	<!-- Top Bar -->
+	<header>
+		<div class="top-bar">
+			<div class="left">
+				<a th:href="@{/}" class="store-link">
+					<h1 class="store-name">Loja Desportiva</h1>
+				</a>
+			</div>
+			<div class="right profile-container">
+				<button id="profile-btn">👤</button>
+				<div class="profile-menu" id="profile-menu">
+					<p>Opção 1</p>
+					<p>Opção 2</p>
+				</div>
+			</div>
+		</div>
+
+		<nav class="categories">
+			<a th:href="@{/products}">Todos os Produtos</a>
+			<a th:each="category : ${categories}"
+				th:href="@{'/products/category/' + ${category}}"
+				th:text="${category}">Categoria</a>
+		</nav>
+	</header>
+
+	<!-- Conteúdo do Produto -->
+	<main>
+		<section class="product-detail">
+			<div class="product-image">
+				<img th:src="@{${product.image}}" th:alt="${product.name}" />
+			</div>
+			<div class="product-info">
+				<h2 th:text="${product.name}">Nome do Produto</h2>
+				<p class="price" th:text="'€' + ${product.price}">Preço</p>
+				<p class="description" th:text="${product.description}">Descrição</p>
+				<p class="availability">
+					Disponível: <span th:text="${product.amount > 0 ? '✔️' : '❌'}"></span>
+				</p>
+				<button class="buy-button" th:disabled="${product.amount == 0}">Comprar</button>
+			</div>
+		</section>
+	</main>
+
+	<script>
+    const profileBtn = document.getElementById("profile-btn");
+    const profileMenu = document.getElementById("profile-menu");
+    profileBtn.addEventListener("click", () => {
+      profileMenu.classList.toggle("show");
+    });
+  </script>
 </body>
 </html>

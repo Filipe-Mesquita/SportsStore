@@ -9,14 +9,14 @@ public class Product {
 	private int amount;
 	private String image;
 
-	public Product(Long id, String name, String description, double price, String category, int amount) {
+	public Product(Long id, String name, String description, double price, String category, int amount, String image) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
 		this.amount = amount;
-		this.image = "/images/fraternitatem_simbolo.png";
+		this.image = image;
 	}
 
 	// Getters and setters omitted for brevity

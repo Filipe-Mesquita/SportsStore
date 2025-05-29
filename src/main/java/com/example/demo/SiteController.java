@@ -14,7 +14,7 @@ public class SiteController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("featuredProducts", productService.getAllProducts());
+		model.addAttribute("latestProducts", productService.getLatestProducts());
 		model.addAttribute("categories", productService.getAllCategories());
 		return "index";
 	}
@@ -30,6 +30,7 @@ public class SiteController {
 		Product product = productService.getProductById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
 		model.addAttribute("product", product);
+		model.addAttribute("categories", productService.getAllCategories());
 		return "product-detail";
 	}
 	

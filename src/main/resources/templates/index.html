@@ -10,7 +10,9 @@
 	<header>
 		<div class="top-bar">
 			<div class="left">
-				<h1 class="store-name">Loja Desportiva</h1>
+				<a th:href="@{/}" class="store-link">
+					<h1 class="store-name">Loja Desportiva</h1>
+				</a>
 			</div>
 
 			<div class="right profile-container">
@@ -22,11 +24,12 @@
 			</div>
 		</div>
 
-		 <nav class="categories">
-            <a th:each="category : ${categories}"
-               th:href="@{'/products/category/' + ${category}}"
-               th:text="${category}">Categoria</a>
-        </nav>
+		<nav class="categories">
+			<a th:href="@{/products}">Todos os Produtos</a>
+			<a th:each="category : ${categories}"
+				th:href="@{'/products/category/' + ${category}}"
+				th:text="${category}">Categoria</a>
+		</nav>
 	</header>
 
 	<main>
@@ -34,7 +37,7 @@
 			<h2>Últimos Produtos</h2>
 			<div class="product-list">
 				<!-- Itera sobre a lista de produtos do model -->
-				<a class="product-card" th:each="product : ${featuredProducts}"
+				<a class="product-card" th:each="product : ${latestProducts}"
 					th:href="@{'/products/' + ${product.id}}"> <img
 					th:src="@{${product.image}}" th:alt="${product.name}" />
 					<h3 th:text="${product.name}">Nome do Produto</h3>

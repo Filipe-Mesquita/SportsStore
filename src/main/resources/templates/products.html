@@ -1,15 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>All Products</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="'Categoria: ' + ${category}">Categoria</title>
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-	<h1>Product Catalog</h1>
-	<ul>
-		<li th:each="p : ${products}"><a
-			th:href="@{'/products/' + ${p.id}}" th:text="${p.name}"></a> - $<span
-			th:text="${p.price}"></span></li>
-	</ul>
-	<a href="/">Back to Home</a>
+    <header>
+        <div class="top-bar">
+            <div class="left">
+            <a th:href="@{/}" class="store-link">
+   		 		<h1 class="store-name">Loja Desportiva</h1>
+			</a>
+               
+            </div>
+
+            <div class="right profile-container">
+                <button id="profile-btn">👤</button>
+                <div class="profile-menu" id="profile-menu">
+                    <p>Opção 1</p>
+                    <p>Opção 2</p>
+                </div>
+            </div>
+        </div>
+
+        
+        <nav class="categories">
+        	<a th:href="@{/products}">Todos os Produtos</a>
+            <a th:each="category : ${categories}"
+               th:href="@{'/products/category/' + ${category}}"
+               th:text="${category}">Categoria</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="category-products">
+            <div class="product-list">
+                <a class="product-card" th:each="product : ${products}"
+                   th:href="@{'/products/' + ${product.id}}">
+                    <img th:src="@{${product.image}}" th:alt="${product.name}" />
+                    <h3 th:text="${product.name}">Nome do Produto</h3>
+                    <p th:text="'€' + ${product.price}">Preço</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const profileBtn = document.getElementById("profile-btn");
+        const profileMenu = document.getElementById("profile-menu");
+
+        profileBtn.addEventListener("click", () => {
+            profileMenu.classList.toggle("show");
+        });
+    </script>
 </body>
 </html>

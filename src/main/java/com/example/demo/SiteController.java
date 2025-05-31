@@ -22,6 +22,7 @@ public class SiteController {
 	@GetMapping("/products")
 	public String allProducts(Model model) {
 		model.addAttribute("products", productService.getAllProducts());
+		model.addAttribute("categories", productService.getAllCategories());
 		return "products";
 	}
 

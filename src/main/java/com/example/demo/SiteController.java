@@ -44,15 +44,41 @@ public class SiteController {
 		return "product-detail";
 	}
 	
-	@GetMapping("/products/category/{category}")
-	public String categoryProducts(@PathVariable("category") String category, Model model) {
-		List <Product> categoryProducts = service.getProductByCategory(category);
-		model.addAttribute("category", category);
-		model.addAttribute("products", categoryProducts);
-		model.addAttribute("categories", service.getAllCategories());
-		return "category-products";
-		
-		
+	@GetMapping("/products/category/{categoryId}")
+	public String categoryProducts(@PathVariable("categoryId") Long categoryId, Model model) {
+	    Category category = service.getCategoryById(categoryId)
+	        .orElseThrow(() -> new IllegalArgumentException("Categoria inválida: " + categoryId));
+
+	    List<Product> categoryProducts = service.getProductByCategory(category);
+
+	    model.addAttribute("category", category);
+	    model.addAttribute("products", categoryProducts);
+	    model.addAttribute("categories", service.getAllCategories());
+
+	    return "category-products";
+	}
+	
+	@GetMapping("/admin")
+	public String adminPanel(Model model) {
+	    Product product = new Product();
+	    product.setCategory(new Category()); // 👈 ESSENCIAL
+
+	    model.addAttribute("product", product);
+	    model.addAttribute("category", new Category());
+	    model.addAttribute("categories", service.getAllCategories());
+	    return "admin-panel";
+	}
+	
+	@PostMapping("/products/new")
+	public String saveProduct(@ModelAttribute Product product) {
+	    service.save(product);
+	    return "redirect:/products";
+	}
+
+	@PostMapping("/categories/new")
+	public String saveCategory(@ModelAttribute Category category) {
+	    service.saveCategory(category);
+	    return "redirect:/admin";
 	}
 
 	

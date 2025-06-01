@@ -29,14 +29,14 @@
         <nav class="categories">
         	<a th:href="@{/products}">Todos os Produtos</a>
             <a th:each="category : ${categories}"
-               th:href="@{'/products/category/' + ${category.name}}"
+               th:href="@{/products/category/{id}(id=${category.id})}"
                th:text="${category.name}">Categoria</a>
         </nav>
     </header>
 
     <main>
         <section class="category-products">
-            <h2 th:text="'Categoria: ' + ${category}">Categoria</h2>
+            <h2 th:text="'Categoria: ' + ${category.name}">Categoria</h2>
             <div class="product-list">
                 <a class="product-card" th:each="product : ${products}"
                    th:href="@{'/products/' + ${product.id}}">

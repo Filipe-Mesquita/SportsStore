@@ -5,3 +5,15 @@ INSERT INTO category (id, name) VALUES
 (2, 'Basebol'),
 (3, 'BasketBol),
 (4, 'Karaté'); [42000-232]
+2025-06-01 15:29:55.831437+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE [*]* FROM CATEGORY"; expected "identifier"; SQL statement:
+DELETE * FROM CATEGORY [42001-232]
+2025-06-01 15:32:05.599294+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete from CATEGORY where name = 'Futbol'[*]PRODUCT"; SQL statement:
+delete from CATEGORY where name = 'Futbol'PRODUCT [42000-232]
+2025-06-01 15:53:01.020033+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete [*]* FROM CATEGORY  where id =2"; expected "identifier"; SQL statement:
+delete * FROM CATEGORY  where id =2 [42001-232]
+2025-06-01 15:53:05.019193+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete [*]* FROM CATEGORY  where id = 2"; expected "identifier"; SQL statement:
+delete * FROM CATEGORY  where id = 2 [42001-232]

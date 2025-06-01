@@ -25,7 +25,14 @@ public class ProductService {
     public Product save(Product p) {
         return repo.save(p);
     }
-
+    
+    public void saveCategory(Category c) {
+        categoryRepo.save(c);
+    }
+    
+    public Optional<Category> getCategoryById(Long id) {
+        return categoryRepo.findById(id);
+    }
     // Get latest 3 products (ordered by ID descending)
     public List<Product> getLatestProducts() {
         return repo.findTop3ByOrderByIdDesc();
@@ -37,7 +44,7 @@ public class ProductService {
     }
 
     // Get products by category name
-    public List<Product> getProductByCategory(String category) {
+    public List<Product> getProductByCategory(Category category) {
         return repo.findByCategory(category);
     }
 

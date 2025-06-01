@@ -1,7 +1,14 @@
 package com.example.demo;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Product {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-incrementado
 	private Long id;
+	
 	private String name;
 	private String description;
 	private double price;
@@ -18,6 +25,9 @@ public class Product {
 		this.amount = amount;
 		this.image = image;
 	}
+
+	public Product() {}
+
 
 	// Getters and setters omitted for brevity
 	public Long getId() {

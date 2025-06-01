@@ -29,8 +29,8 @@
         <nav class="categories">
         	<a th:href="@{/products}">Todos os Produtos</a>
             <a th:each="category : ${categories}"
-               th:href="@{'/products/category/' + ${category}}"
-               th:text="${category}">Categoria</a>
+               th:href="@{'/products/category/' + ${category.name}}"
+               th:text="${category.name}">Categoria</a>
         </nav>
     </header>
 

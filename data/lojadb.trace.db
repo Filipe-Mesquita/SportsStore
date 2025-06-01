@@ -1,0 +1,7 @@
+2025-06-01 14:35:16.948149+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO category (id, name) VALUES\000d\000a(1, 'Futebol'),\000d\000a(2, 'Basebol'),\000d\000a(3, 'BasketBol),\000d\000a(4, 'Karaté[*]');"; SQL statement:
+INSERT INTO category (id, name) VALUES
+(1, 'Futebol'),
+(2, 'Basebol'),
+(3, 'BasketBol),
+(4, 'Karaté'); [42000-232]

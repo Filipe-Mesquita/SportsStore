@@ -10,7 +10,7 @@
 	<header>
 		<div class="top-bar">
 			<div class="left">
-				<a th:href="@{/}" class="store-link">
+				<a th:href="@{/store}" class="store-link">
 					<h1 class="store-name">Loja Desportiva</h1>
 				</a>
 			</div>
@@ -25,9 +25,9 @@
 		</div>
 
 		<nav class="categories">
-			<a th:href="@{/products}">Todos os Produtos</a>
+			<a th:href="@{/store/products}">Todos os Produtos</a>
 			<a th:each="category : ${categories}"
-				th:href="@{/products/category/{id}(id=${category.id})}"
+				th:href="@{/store/products/category/{id}(id=${category.id})}"
 				th:text="${category.name}">Categoria</a>
 		</nav>
 	</header>
@@ -38,13 +38,16 @@
 			<div class="product-list">
 				<!-- Itera sobre a lista de produtos do model -->
 				<a class="product-card" th:each="product : ${latestProducts}"
-					th:href="@{'/products/' + ${product.id}}"> <img
+					th:href="@{'/store/products/' + ${product.id}}"> <img
 					th:src="@{${product.image}}" th:alt="${product.name}" />
 					<h3 th:text="${product.name}">Nome do Produto</h3>
 					<p th:text="'€' + ${product.price}">Preço</p>
 				</a>
 			</div>
 		</section>
+		<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
 	</main>
 
 	<script>

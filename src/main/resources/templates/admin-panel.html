@@ -22,7 +22,7 @@
 
     <!-- Formulário de Produto -->
     <div id="productForm" class="form-container">
-        <form th:action="@{/products/new}" th:object="${product}" method="post">
+        <form th:action="@{/admin/products/new}" th:object="${product}" method="post">
             <label>Nome:</label><br/>
             <input type="text" th:field="*{name}" /><br/>
 
@@ -49,7 +49,7 @@
 
     <!-- Formulário de Categoria -->
     <div id="categoryForm" class="form-container">
-        <form th:action="@{/categories/new}" th:object="${category}" method="post">
+        <form th:action="@{/admin/categories/new}" th:object="${category}" method="post">
             <label>Nome da Categoria:</label><br/>
             <input type="text" th:field="*{name}" /><br/><br/>
             <button type="submit">Salvar Categoria</button>

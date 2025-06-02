@@ -1,6 +1,11 @@
-package com.example.demo;
+package com.example.demo.services;
 
 import org.springframework.stereotype.Service;
+
+import com.example.demo.classes.Category;
+import com.example.demo.classes.Product;
+import com.example.demo.repo.CategoryRepository;
+import com.example.demo.repo.ProductRepository;
 
 import java.util.List;
 import java.util.Optional;

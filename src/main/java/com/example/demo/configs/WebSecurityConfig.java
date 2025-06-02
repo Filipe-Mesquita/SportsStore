@@ -19,7 +19,8 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home").permitAll()
+				.requestMatchers("/", "/login","/h2-console").permitAll()
+				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -39,7 +40,13 @@ public class WebSecurityConfig {
 				.password("password")
 				.roles("USER")
 				.build();
+		UserDetails user2 =
+				User.withDefaultPasswordEncoder()
+					.username("admin")
+					.password("password")
+					.roles("ADMIN")
+					.build();
 
-		return new InMemoryUserDetailsManager(user);
+		return new InMemoryUserDetailsManager(user, user2);
 	}
 }

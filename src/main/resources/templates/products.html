@@ -1,53 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title th:text="'Categoria: ' + ${category}">Categoria</title>
-    <link rel="stylesheet" href="/css/styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title th:text="'Categoria: ' + ${category}">Categoria</title>
+<link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-    <header>
-        <div class="top-bar">
-            <div class="left">
-            <a th:href="@{/store}" class="store-link">
-   		 		<h1 class="store-name">Loja Desportiva</h1>
-			</a>
-               
-            </div>
+	<header>
+		<div class="top-bar">
+			<div class="left">
+				<a th:href="@{/store}" class="store-link">
+					<h1 class="store-name">Loja Desportiva</h1>
+				</a>
 
-            <div class="right profile-container">
-                <button id="profile-btn">👤</button>
-                <div class="profile-menu" id="profile-menu">
-                    <p>Opção 1</p>
-                    <p>Opção 2</p>
-                </div>
-            </div>
-        </div>
+			</div>
 
-        
-        <nav class="categories">
-        	<a th:href="@{/store/products}">Todos os Produtos</a>
-            <a th:each="category : ${categories}"
-               th:href="@{/store/products/category/{id}(id=${category.id})}"
-               th:text="${category.name}">Categoria</a>
-        </nav>
-    </header>
 
-    <main>
-        <section class="category-products">
-            <div class="product-list">
-                <a class="product-card" th:each="product : ${products}"
-                   th:href="@{'/store/products/' + ${product.id}}">
-                    <img th:src="@{${product.image}}" th:alt="${product.name}" />
-                    <h3 th:text="${product.name}">Nome do Produto</h3>
-                    <p th:text="'€' + ${product.price}">Preço</p>
-                </a>
-            </div>
-        </section>
-    </main>
+			<div class="right profile-container">
+				<button id="profile-btn">👤</button>
+				<div class="profile-menu" id="profile-menu">
+					<a th:href="@{/userSettings}">Definições</a> <a href="#"
+						onclick="document.getElementById('logout-form').submit(); return false;">Log
+						out</a>
+				</div>
+				<form th:action="@{/logout}" method="post" id="logout-form"
+					style="display: none;"></form>
+			</div>
+		</div>
 
-    <script>
+
+		<nav class="categories">
+			<a th:href="@{/store/products}">Todos os Produtos</a> <a
+				th:each="category : ${categories}"
+				th:href="@{/store/products/category/{id}(id=${category.id})}"
+				th:text="${category.name}">Categoria</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="category-products">
+			<div class="product-list">
+				<a class="product-card" th:each="product : ${products}"
+					th:href="@{'/store/products/' + ${product.id}}"> <img
+					th:src="@{${product.image}}" th:alt="${product.name}" />
+					<h3 th:text="${product.name}">Nome do Produto</h3>
+					<p th:text="'€' + ${product.price}">Preço</p>
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<script>
         const profileBtn = document.getElementById("profile-btn");
         const profileMenu = document.getElementById("profile-menu");
 

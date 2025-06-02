@@ -15,18 +15,28 @@
 					<h1 class="store-name">Loja Desportiva</h1>
 				</a>
 			</div>
+
+			<div th:if="${successMessage}" class="alert alert-success"
+				th:text="${successMessage}"></div>
+			<div th:if="${errorMessage}" class="alert alert-danger"
+				th:text="${errorMessage}"></div>
+
+
 			<div class="right profile-container">
 				<button id="profile-btn">👤</button>
 				<div class="profile-menu" id="profile-menu">
-					<p>Opção 1</p>
-					<p>Opção 2</p>
+					<a th:href="@{/userSettings}">Definições</a> <a href="#"
+						onclick="document.getElementById('logout-form').submit(); return false;">Log
+						out</a>
 				</div>
+				<form th:action="@{/logout}" method="post" id="logout-form"
+					style="display: none;"></form>
 			</div>
 		</div>
 
 		<nav class="categories">
-			<a th:href="@{/store/products}">Todos os Produtos</a>
-			<a th:each="category : ${categories}"
+			<a th:href="@{/store/products}">Todos os Produtos</a> <a
+				th:each="category : ${categories}"
 				th:href="@{/store/products/category/{id}(id=${category.id})}"
 				th:text="${category.name}">Categoria</a>
 		</nav>
@@ -45,7 +55,10 @@
 				<p class="availability">
 					Disponível: <span th:text="${product.amount > 0 ? '✔️' : '❌'}"></span>
 				</p>
-				<button class="buy-button" th:disabled="${product.amount == 0}">Comprar</button>
+				<form th:action="@{/buy/{id}(id=${product.id})}" method="post">
+					<button type="submit" class="buy-button"
+						th:disabled="${product.amount == 0}">Comprar</button>
+				</form>
 			</div>
 		</section>
 	</main>

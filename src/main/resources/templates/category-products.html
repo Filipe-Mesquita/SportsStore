@@ -16,13 +16,17 @@
                
             </div>
 
-            <div class="right profile-container">
-                <button id="profile-btn">👤</button>
-                <div class="profile-menu" id="profile-menu">
-                    <p>Opção 1</p>
-                    <p>Opção 2</p>
-                </div>
-            </div>
+            
+			<div class="right profile-container">
+				<button id="profile-btn">👤</button>
+				<div class="profile-menu" id="profile-menu">
+					<a th:href="@{/userSettings}">Definições</a> <a href="#"
+						onclick="document.getElementById('logout-form').submit(); return false;">Log
+						out</a>
+				</div>
+				<form th:action="@{/logout}" method="post" id="logout-form"
+					style="display: none;"></form>
+			</div>
         </div>
 
         

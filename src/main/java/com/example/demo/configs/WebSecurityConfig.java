@@ -27,7 +27,12 @@ public class WebSecurityConfig {
 				.loginPage("/login")
 				.permitAll()
 			)
-			.logout((logout) -> logout.permitAll());
+			.logout((logout) -> logout.permitAll())
+			.sessionManagement(session -> session
+		        .sessionFixation().newSession()  // Creates a new session upon login
+		        .maximumSessions(1) // Restricts user to one session at a time
+		        .expiredUrl("/login?sessionExpired") // Redirects if session expires
+		    );
 
 		return http.build();
 	}

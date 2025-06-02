@@ -1,5 +1,7 @@
 package com.example.demo.configs;
+import com.example.demo.classes.UserObj;
 
+import java.util.*;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -19,7 +22,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/login","/h2-console").permitAll()
+				.requestMatchers("/login","/h2-console").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
@@ -36,22 +39,20 @@ public class WebSecurityConfig {
 
 		return http.build();
 	}
-
+	public ArrayList<UserObj> userList = new ArrayList<>(Arrays.asList(new UserObj("user","password"),new UserObj("admin","password")));
 	@Bean
 	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			 User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.build();
-		UserDetails user2 =
-				User.withDefaultPasswordEncoder()
-					.username("admin")
-					.password("password")
-					.roles("ADMIN")
-					.build();
+	    List<UserDetails> userDetailsList = new ArrayList<>();
 
-		return new InMemoryUserDetailsManager(user, user2);
+	    for (UserObj userObj : userList) {
+	        UserDetails userDetails = User.withUsername(userObj.getName())
+	                .password("{noop}" + userObj.getPassword()) // {noop} means no password encoding for testing
+	                .roles("USER") // Default role; modify as needed
+	                .build();
+
+	        userDetailsList.add(userDetails);
+	    }
+
+	    return new InMemoryUserDetailsManager(userDetailsList);
 	}
 }

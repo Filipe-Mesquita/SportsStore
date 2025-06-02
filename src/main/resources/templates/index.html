@@ -18,15 +18,18 @@
 			<div class="right profile-container">
 				<button id="profile-btn">👤</button>
 				<div class="profile-menu" id="profile-menu">
-						<a th:href="@{/userSettings}">Definições</a>
-						<p>Log out</p>
+					<a th:href="@{/userSettings}">Definições</a> <a href="#"
+						onclick="document.getElementById('logout-form').submit(); return false;">Log
+						out</a>
 				</div>
+				<form th:action="@{/logout}" method="post" id="logout-form"
+					style="display: none;"></form>
 			</div>
 		</div>
 
 		<nav class="categories">
-			<a th:href="@{/store/products}">Todos os Produtos</a>
-			<a th:each="category : ${categories}"
+			<a th:href="@{/store/products}">Todos os Produtos</a> <a
+				th:each="category : ${categories}"
 				th:href="@{/store/products/category/{id}(id=${category.id})}"
 				th:text="${category.name}">Categoria</a>
 		</nav>
@@ -45,9 +48,6 @@
 				</a>
 			</div>
 		</section>
-		<form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
 	</main>
 
 	<script>

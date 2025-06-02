@@ -4,12 +4,14 @@ public class UserObj {
 	
 	private String name;
 	private String password;
+	private String role;
 	
 	
-	public UserObj(String name, String password) {
+	public UserObj(String name, String password,String role) {
 		super();
 		this.name = name;
 		this.password = password;
+		this.role = role;
 	}
 	
 	
@@ -24,6 +26,16 @@ public class UserObj {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

@@ -39,7 +39,7 @@ public class WebSecurityConfig {
 
 		return http.build();
 	}
-	public ArrayList<UserObj> userList = new ArrayList<>(Arrays.asList(new UserObj("user","password"),new UserObj("admin","password")));
+	public ArrayList<UserObj> userList = new ArrayList<>(Arrays.asList(new UserObj("user","password","USER"),new UserObj("admin","password","ADMIN")));
 	@Bean
 	public UserDetailsService userDetailsService() {
 	    List<UserDetails> userDetailsList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class WebSecurityConfig {
 	    for (UserObj userObj : userList) {
 	        UserDetails userDetails = User.withUsername(userObj.getName())
 	                .password("{noop}" + userObj.getPassword()) // {noop} means no password encoding for testing
-	                .roles("USER") // Default role; modify as needed
+	                .roles(userObj.getRole()) // Default role; modify as needed
 	                .build();
 
 	        userDetailsList.add(userDetails);

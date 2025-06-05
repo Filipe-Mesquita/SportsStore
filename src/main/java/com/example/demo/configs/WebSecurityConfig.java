@@ -22,10 +22,15 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/login","/h2-console").permitAll()
+				.requestMatchers("/login","/h2-console/**").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
+			.csrf(csrf -> csrf
+	                .ignoringRequestMatchers("/h2-console/**") // Disable CSRF for H2 console
+	        ).headers(headers -> headers
+	                .frameOptions(frameOptions -> frameOptions.disable()) // Allow frames for H2
+	        )
 			.formLogin((form) -> form
 				.loginPage("/login")
 				.permitAll()
